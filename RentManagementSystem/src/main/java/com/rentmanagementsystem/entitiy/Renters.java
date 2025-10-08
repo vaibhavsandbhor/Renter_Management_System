@@ -7,6 +7,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "renters")
@@ -26,6 +27,8 @@ public class Renters {
     @JoinColumn(name = "flat_id")
     private FlatDetails flat;
 
+    @OneToMany(mappedBy = "flat")
+    private List<RentTransactionEntity> transactions;
     @Column(name = "rentert_name", nullable = false, length = 100)
     private String rentertName;
 
