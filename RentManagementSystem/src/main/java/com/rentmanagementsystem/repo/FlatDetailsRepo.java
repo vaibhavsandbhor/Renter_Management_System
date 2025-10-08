@@ -6,4 +6,6 @@ import com.rentmanagementsystem.entitiy.FlatDetails;
 
 public interface FlatDetailsRepo extends JpaRepository<FlatDetails, Integer> {
 
+	
+	long countByStatus(String status);
 }
