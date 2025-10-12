@@ -1,19 +1,13 @@
 package com.rentmanagementsystem.entitiy;
 
-
-
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "wing")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Wing {
 
     @Id
@@ -24,7 +18,7 @@ public class Wing {
     @Column(name = "wing_name", nullable = false, length = 100)
     private String wingName;
 
-    @Column(name = "address", columnDefinition = "text")
+    @Column(name = "address")
     private String address;
 
     @Column(name = "total_flat")
@@ -33,8 +27,9 @@ public class Wing {
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
-    // Relationship mapping: One Wing -> Many Flats
-    @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL)
     private List<FlatDetails> flats;
-}
 
+    @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL)
+    private List<Renters> renters;
+}

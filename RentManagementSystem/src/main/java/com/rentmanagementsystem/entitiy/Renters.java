@@ -1,20 +1,15 @@
 package com.rentmanagementsystem.entitiy;
 
-
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "renters")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Renters {
 
     @Id
@@ -22,19 +17,15 @@ public class Renters {
     @Column(name = "renter_id")
     private Integer renterId;
 
-    // Many renters can belong to one flat
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "flat_id")
     private FlatDetails flat;
 
-    @OneToMany(mappedBy = "flat")
-    private List<RentTransactionEntity> transactions;
     @Column(name = "rentert_name", nullable = false, length = 100)
     private String rentertName;
 
-    @Column(name = "mobile_no", length = 10)
+    @Column(name = "mobile_no", length = 255)
     private String mobileNo;
-
 
     @Column(name = "email", length = 100)
     private String email;
@@ -49,9 +40,15 @@ public class Renters {
     private LocalDate moveOutDate;
 
     @Column(name = "is_active")
-    private Boolean isActive = true;
+    private Boolean isActive;
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
-}
 
+    @ManyToOne
+    @JoinColumn(name = "wing_id")
+    private Wing wing;
+
+    @OneToMany(mappedBy = "renter", cascade = CascadeType.ALL)
+    private List<RentTransactionEntity> transactions;
+}

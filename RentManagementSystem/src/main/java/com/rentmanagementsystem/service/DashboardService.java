@@ -27,13 +27,17 @@ public class DashboardService {
 
     public DashboardSummaryDTO getDashboardSummary() {
         String monthYear = LocalDate.now().toString().substring(0, 7); // YYYY-MM
+        
+        System.out.println("monthyear"+monthYear);
 
-        BigDecimal collected = txnRepo.getCollectedAmountForMonth(monthYear);
-        BigDecimal pending = txnRepo.getPendingRentForMonth(monthYear);
+        BigDecimal collected = txnRepo.getTotalCollectedForMonth(monthYear);
+        BigDecimal pending = txnRepo.getPendingAmountForMonth(monthYear);
         BigDecimal totalDeposits = renterRepo.findAll().stream()
                 .map(r -> r.getDepositAmount() == null ? BigDecimal.ZERO : r.getDepositAmount())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        
+        
         long totalRenters = renterRepo.count();
         long totalFlats = flatRepo.count();
         long occupied = flatRepo.countByStatus("occupied");
@@ -49,12 +53,12 @@ public class DashboardService {
         );
     }
 
-    public List<RecentPaymentDTO> getRecentPayments() {
+   public List<RecentPaymentDTO> getRecentPayments() {
         return txnRepo.findRecentPayments().stream()
                 .limit(5)
                 .map(t -> new RecentPaymentDTO(
-                        renterRepo.findById(t.getRenterId()).map(r -> r.getRentertName()).orElse("Unknown"),
-                        t.getFlatId().toString(),
+                        renterRepo.findById(t.getRenter().getRenterId()).map(r -> r.getRentertName()).orElse("Unknown"),
+                        t.getFlat().getFlatId().toString(),
                         t.getPaymentMode(),
                         t.getPaidAmount(),
                         t.getPaymentDate()

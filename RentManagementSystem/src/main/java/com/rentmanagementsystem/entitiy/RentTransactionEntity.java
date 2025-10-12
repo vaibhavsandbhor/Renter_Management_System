@@ -1,7 +1,5 @@
 package com.rentmanagementsystem.entitiy;
 
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
@@ -18,17 +16,20 @@ public class RentTransactionEntity {
     @Column(name = "transaction_id")
     private Integer transactionId;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private MasterUser user;
 
-    @Column(name = "renter_id")
-    private Integer renterId;
+    @ManyToOne
+    @JoinColumn(name = "renter_id")
+    private Renters renter;
 
-    @Column(name = "flat_id")
-    private Integer flatId;
+    @ManyToOne
+    @JoinColumn(name = "flat_id")
+    private FlatDetails flat;
 
     @Column(name = "month_year", nullable = false, length = 7)
-    private String monthYear; // format: YYYY-MM
+    private String monthYear; // YYYY-MM
 
     @Column(name = "rent_amount", precision = 10, scale = 2)
     private BigDecimal rentAmount;

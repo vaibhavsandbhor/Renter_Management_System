@@ -28,8 +28,8 @@ public class RenterService {
 	}
 
     
-
-    // 1. Get all renters and transactions for a flat
+//
+//    // 1. Get all renters and transactions for a flat
     public Map<Renters, List<RentTransactionEntity>> getRentersAndTransactionsByFlatId(Integer flatId) {
         List<RentTransactionEntity> transactions = rentTransactionRepository.findAllTransactionsByFlatId(flatId);
 
