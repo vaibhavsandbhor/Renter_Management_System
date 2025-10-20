@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rentmanagementsystem.entitiy.RentTransactionEntity;
 import com.rentmanagementsystem.entitiy.Renters;
 import com.rentmanagementsystem.service.RenterService;
 @RestController
@@ -23,4 +24,11 @@ public class RenterController {
 	{
       return renterservice.getAllRenters();
 	}
+	
+	
+//	public List<RentTransactionEntity> getAllTransctionDetails()
+//	{
+//		return ;
+//		
+//	}
 }
