@@ -46,6 +46,10 @@ public interface RentTransactionrepo extends JpaRepository<RentTransactionEntity
             @Param("wingName") String wingName
     );
 
+    
+    
+    List<RentTransactionEntity> findByMonthYear(String monthYear);
+    
     // Fetch all transactions for a flat
     @Query("SELECT t FROM RentTransactionEntity t JOIN FETCH t.renter WHERE t.flat.flatId = :flatId")
     List<RentTransactionEntity> findAllTransactionsByFlatId(@Param("flatId") Integer flatId);
@@ -55,12 +59,14 @@ public interface RentTransactionrepo extends JpaRepository<RentTransactionEntity
             SELECT t FROM RentTransactionEntity t
             JOIN FETCH t.renter
             JOIN FETCH t.flat
-            WHERE t.renter.rentertName = :renterName
+            WHERE t.renter.renterName = :renterName
             AND t.flat.flatName = :flatName
         """)
     List<RentTransactionEntity> findAllTransactionsByRenterAndFlat(
             @Param("renterName") String renterName,
             @Param("flatName") String flatName
     );
+   
 
+	List<RentTransactionEntity> findAllByMonthYearAndRenter_Wing_WingName(String monthYear, String wingName);
 }

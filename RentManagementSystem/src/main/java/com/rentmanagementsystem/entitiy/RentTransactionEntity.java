@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @Entity
 @Table(name = "rent_transactions")
@@ -18,14 +20,25 @@ public class RentTransactionEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private MasterUser user;
 
     @ManyToOne
     @JoinColumn(name = "renter_id")
+@JsonIgnore
     private Renters renter;
 
+    
+
+    @ManyToOne
+    @JoinColumn(name = "wing_id")
+    @JsonIgnore
+    private Wing wing;
+    
+    
     @ManyToOne
     @JoinColumn(name = "flat_id")
+    @JsonIgnore
     private FlatDetails flat;
 
     @Column(name = "month_year", nullable = false, length = 7)

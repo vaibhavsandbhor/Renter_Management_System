@@ -57,7 +57,7 @@ public class DashboardService {
         return txnRepo.findRecentPayments().stream()
                 .limit(5)
                 .map(t -> new RecentPaymentDTO(
-                        renterRepo.findById(t.getRenter().getRenterId()).map(r -> r.getRentertName()).orElse("Unknown"),
+                        renterRepo.findById(t.getRenter().getRenterId()).map(r -> r.getRenterName()).orElse("Unknown"),
                         t.getFlat().getFlatId().toString(),
                         t.getPaymentMode(),
                         t.getPaidAmount(),

@@ -21,4 +21,5 @@ public class TransactionHistoryDTO {
     private String method;
     private BigDecimal amount;
     private String status;
+    private String remarks;
 }

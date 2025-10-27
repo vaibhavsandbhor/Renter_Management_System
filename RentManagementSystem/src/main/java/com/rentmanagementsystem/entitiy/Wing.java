@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -31,5 +32,10 @@ public class Wing {
     private List<FlatDetails> flats;
 
     @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Renters> renters;
+
+    @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RentTransactionEntity> transactions;
 }

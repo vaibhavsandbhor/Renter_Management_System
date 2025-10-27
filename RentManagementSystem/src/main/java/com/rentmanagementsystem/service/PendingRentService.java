@@ -39,7 +39,7 @@ public class PendingRentService {
                         .multiply(BigDecimal.valueOf(monthsDue));
 
                 pendingList.add(new PendingRentDTO(
-                        renter.getRentertName(),
+                        renter.getRenterName(),
                         renter.getFlat().getFlatName(),
                         (int) monthsDue,
                         dueAmount,
@@ -54,7 +54,7 @@ public class PendingRentService {
                             .multiply(BigDecimal.valueOf(monthsDue));
 
                     pendingList.add(new PendingRentDTO(
-                            renter.getRentertName(),
+                            renter.getRenterName(),
                             renter.getFlat().getFlatName(),
                             (int) monthsDue,
                             dueAmount,
